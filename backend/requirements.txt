@@ -1,0 +1,17 @@
+# Web framework for creating our API endpoints
+fastapi==0.110.0
+
+# Server that runs the FastAPI application
+uvicorn==0.28.0
+
+# Library to talk to MongoDB database
+pymongo==4.6.2
+
+# Library to talk to MinIO file storage
+minio==7.2.5
+
+# Library to securely hash (scramble) user passwords
+bcrypt==4.1.2
+
+# Library needed by FastAPI to receive uploaded files from browser
+python-multipart==0.0.9

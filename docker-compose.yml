@@ -1,0 +1,73 @@
+# ----------------------------------------------------------------------
+# docker-compose.yml — list of all the containers (small boxes) we want to run
+# ----------------------------------------------------------------------
+
+services:
+  # --------------------------------------------------------------------
+  # Service 1: MongoDB (Database to store user details and file info)
+  # --------------------------------------------------------------------
+  mongo:
+    # Official ready-made recipe from Docker Hub for MongoDB
+    image: mongo:7.0
+    container_name: simpledrive_mongo
+    # Restart automatically if it crashes
+    restart: always
+    # Port forwarding: Left side (27017) is your laptop, Right side (27017) is inside the container
+    ports:
+      - "27017:27017"
+    # Permanent storage: external disk so data is NOT lost when container stops
+    volumes:
+      - mongo_data:/data/db
+
+  # --------------------------------------------------------------------
+  # Service 2: MinIO (File storage server to store actual files/bytes)
+  # --------------------------------------------------------------------
+  minio:
+    # Official ready-made recipe for MinIO
+    image: minio/minio:latest
+    container_name: simpledrive_minio
+    restart: always
+    # Command to start MinIO server and enable the web management console on port 9001
+    command: server /data --console-address ":9001"
+    # Pass secret username and password from our .env file
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    # Two doors: 9000 for code/API, 9001 for the web UI console in browser
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    # Permanent storage for the uploaded files
+    volumes:
+      - minio_data:/data
+
+  # --------------------------------------------------------------------
+  # Service 3: Backend (Our Python FastAPI brain)
+  # --------------------------------------------------------------------
+  backend:
+    # Tell Docker to build our container using the recipe inside backend/ folder
+    build: ./backend
+    container_name: simpledrive_backend
+    restart: always
+    # Port forwarding: Left side (8000 on your laptop) -> Right side (8000 inside container)
+    ports:
+      - "8000:8000"
+    # Pass environment variables from .env file into this container
+    env_file:
+      - .env
+    # Volume mount: Sync our local code with /app inside container for instant live reload
+    volumes:
+      - ./backend:/app
+    # Start mongo and minio before starting backend
+    depends_on:
+      - mongo
+      - minio
+
+
+# ----------------------------------------------------------------------
+# Named volumes: permanent storage hard disks created and managed by Docker
+# ----------------------------------------------------------------------
+volumes:
+  mongo_data:
+  minio_data:
+
