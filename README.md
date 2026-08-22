@@ -1,1 +1,1 @@
-to create a clone of google drive but to be simple
+to create a clone of google drive but to be simple and clean
