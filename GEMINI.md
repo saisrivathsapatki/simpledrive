@@ -559,4 +559,4 @@ Start like this (adapt the wording, keep the spirit):
 
 ---
 
-**End of GEMINI.md**
+**End of GEMINIst.md**
