@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Tell the browser this is a modern HTML page. -->
+<html lang="en">
+<!-- The head keeps page settings that are not shown as page content. -->
+<head>
+    <!-- Use normal text characters correctly. -->
+    <meta charset="UTF-8">
+    <!-- Make the layout fit phone and laptop screens. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Text shown on the browser tab. -->
+    <title>SimpleDrive</title>
+    <!-- Load our own CSS file for the page design. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- The body contains everything the visitor can see. -->
+<body>
+    <!-- Keep the page content in one centred card. -->
+    <main class="auth-page">
+        <!-- Introduce the small drive application. -->
+        <section class="welcome-panel">
+            <p class="brand-name">SimpleDrive</p>
+            <h1>Your files, simply organised.</h1>
+            <p class="welcome-text">Create an account once, then upload and manage your files.</p>
+        </section>
+
+        <!-- Hold the two account forms next to each other on a wide screen. -->
+        <section class="forms-panel" aria-label="Account forms">
+            <!-- New users use this form to create an account. -->
+            <form id="signup-form" class="auth-form">
+                <h2>Create account</h2>
+                <p class="form-help">New here? Start with your email and a password.</p>
+
+                <!-- An email input lets the browser check the email shape also. -->
+                <label for="signup-email">Email address</label>
+                <input id="signup-email" type="email" required autocomplete="email">
+
+                <!-- Password input hides the characters while the user types. -->
+                <label for="signup-password">Password</label>
+                <input id="signup-password" type="password" required autocomplete="new-password">
+
+                <!-- JavaScript will handle this button click without refreshing the page. -->
+                <button type="submit">Create account</button>
+            </form>
+
+            <!-- Existing users use this form to log in. -->
+            <form id="login-form" class="auth-form">
+                <h2>Log in</h2>
+                <p class="form-help">Already have an account? Come back in.</p>
+
+                <!-- Ask for the existing user's email. -->
+                <label for="login-email">Email address</label>
+                <input id="login-email" type="email" required autocomplete="email">
+
+                <!-- Ask for the existing user's password. -->
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" required autocomplete="current-password">
+
+                <!-- JavaScript will send these details to our backend. -->
+                <button type="submit">Log in</button>
+            </form>
+
+            <!-- Show friendly success or error messages here. -->
+            <p id="message" class="message" role="status"></p>
+        </section>
+    </main>
+
+    <!-- Load our JavaScript after the page elements are ready. -->
+    <script src="app.js"></script>
+</body>
+</html>

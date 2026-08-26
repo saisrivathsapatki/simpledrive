@@ -1,0 +1,200 @@
+/* Keep colours in one place so changing the page look is easy later. */
+:root {
+    --page-background: #f4f7fb;
+    --card-background: #ffffff;
+    --main-colour: #2563eb;
+    --main-colour-dark: #1d4ed8;
+    --text-colour: #172033;
+    --soft-text-colour: #5e6b82;
+    --border-colour: #d9e0ec;
+    --error-colour: #b42318;
+    --success-colour: #067647;
+}
+
+/* Make box sizes include their padding, which keeps layout calculations simple. */
+* {
+    box-sizing: border-box;
+}
+
+/* Set the page's basic font, background colour, and zero outer spacing. */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--page-background);
+    color: var(--text-colour);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Centre the full login card in the browser window. */
+.auth-page {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1.1fr);
+    width: min(940px, calc(100% - 32px));
+    min-height: 560px;
+    margin: 48px auto;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--card-background);
+    box-shadow: 0 14px 42px rgba(31, 53, 87, 0.14);
+}
+
+/* Give the left welcome area our main blue colour. */
+.welcome-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+    background: linear-gradient(145deg, #2563eb, #1e40af);
+    color: #ffffff;
+}
+
+/* Make the app name stand out slightly. */
+.brand-name {
+    margin: 0 0 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+/* Set a clear size for the welcome heading. */
+.welcome-panel h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.13;
+}
+
+/* Make the supporting welcome text easier to read. */
+.welcome-text {
+    max-width: 310px;
+    margin: 22px 0 0;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Arrange the account forms in a comfortable vertical column. */
+.forms-panel {
+    display: grid;
+    align-content: center;
+    gap: 28px;
+    padding: 42px;
+}
+
+/* Keep related form fields together. */
+.auth-form {
+    display: grid;
+    gap: 9px;
+}
+
+/* Give each form heading a clean size and remove extra outer spacing. */
+.auth-form h2 {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+/* Use a softer colour for small helper sentences. */
+.form-help {
+    margin: 0 0 8px;
+    color: var(--soft-text-colour);
+    font-size: 0.92rem;
+}
+
+/* Make field labels readable and clearly connected to their inputs. */
+label {
+    margin-top: 3px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* Give email and password boxes the same simple visual style. */
+input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border-colour);
+    border-radius: 8px;
+    color: var(--text-colour);
+    font: inherit;
+}
+
+/* Show a visible border when someone starts typing in a field. */
+input:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.2);
+    border-colour: var(--main-colour);
+}
+
+/* Make both form buttons clear and easy to click. */
+button {
+    margin-top: 6px;
+    padding: 11px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--main-colour);
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+/* Slightly darken a button while the pointer is on it. */
+button:hover {
+    background: var(--main-colour-dark);
+}
+
+/* Reserve a small place for our JavaScript messages. */
+.message {
+    min-height: 20px;
+    margin: -12px 0 0;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+/* Use red only when the backend sends an error. */
+.message.error {
+    color: var(--error-colour);
+}
+
+/* Use green only for a successful account action. */
+.message.success {
+    color: var(--success-colour);
+}
+
+/* Stack the welcome area above the forms on smaller screens. */
+@media (max-width: 700px) {
+    .auth-page {
+        grid-template-columns: 1fr;
+        width: min(520px, calc(100% - 24px));
+        margin: 12px auto;
+    }
+
+    .welcome-panel,
+    .forms-panel {
+        padding: 32px 26px;
+    }
+}
+
+/* Keep the logged-in page narrower and comfortable to read. */
+.drive-page { width: min(1050px, calc(100% - 32px)); margin: 32px auto; }
+.drive-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.drive-header h1 { margin: 0; }
+.soft-text, .empty-message { color: var(--soft-text-colour); }
+.storage-card, .upload-card, .files-card { margin-top: 22px; padding: 22px; border-radius: 12px; background: var(--card-background); box-shadow: 0 5px 20px rgba(31, 53, 87, 0.08); }
+.storage-line, .upload-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+.storage-track { height: 10px; margin-top: 12px; overflow: hidden; border-radius: 5px; background: var(--border-colour); }
+.storage-bar { width: 0; height: 100%; border-radius: 5px; background: var(--main-colour); transition: width 0.3s ease; }
+.upload-row input { flex: 1; }
+.secondary-button { width: auto; margin-top: 0; background: #e8eefb; color: var(--main-colour-dark); }
+.secondary-button:hover { background: #d8e3fa; }
+.files-card h2 { margin-top: 0; }
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 13px 10px; border-bottom: 1px solid var(--border-colour); text-align: left; }
+th { color: var(--soft-text-colour); font-size: 0.85rem; }
+.action-cell { white-space: nowrap; }
+.action-cell button { width: auto; margin: 0 4px 4px 0; padding: 7px 9px; font-size: 0.82rem; }
+button:disabled { cursor: wait; opacity: 0.6; }
+[hidden] { display: none; }
+
+/* Let the upload row wrap instead of becoming too narrow on a phone. */
+@media (max-width: 560px) {
+    .drive-header, .upload-row { align-items: stretch; flex-direction: column; }
+    .drive-header .secondary-button { align-self: flex-start; }
+}

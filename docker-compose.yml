@@ -63,6 +63,21 @@ services:
       - mongo
       - minio
 
+  # --------------------------------------------------------------------
+  # Service 4: Frontend (Nginx gives our website to the browser)
+  # --------------------------------------------------------------------
+  frontend:
+    # Build this container using the recipe inside the frontend/ folder.
+    build: ./frontend
+    container_name: simpledrive_frontend
+    restart: always
+    # Port forwarding: laptop port 8080 -> Nginx port 80 inside the container.
+    ports:
+      - "8080:80"
+    # Start the Python backend before this frontend container.
+    depends_on:
+      - backend
+
 
 # ----------------------------------------------------------------------
 # Named volumes: permanent storage hard disks created and managed by Docker
@@ -70,4 +85,3 @@ services:
 volumes:
   mongo_data:
   minio_data:
-

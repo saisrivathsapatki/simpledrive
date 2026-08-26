@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Tell the browser this is a modern HTML page. -->
+<html lang="en">
+<head>
+    <!-- Use normal text characters correctly. -->
+    <meta charset="UTF-8">
+    <!-- Make the layout fit both laptop and phone screens. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Text shown on the browser tab. -->
+    <title>My files - SimpleDrive</title>
+    <!-- Use the same styling file as the login page. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main page wrapper for the logged-in user's drive. -->
+    <main class="drive-page">
+        <!-- Top bar holds the app name, user details, and logout button. -->
+        <header class="drive-header">
+            <div>
+                <p class="brand-name">SimpleDrive</p>
+                <h1>My files</h1>
+                <p id="user-email" class="soft-text">Loading your account...</p>
+            </div>
+            <!-- JavaScript removes the token when this button is clicked. -->
+            <button id="logout-button" class="secondary-button" type="button">Log out</button>
+        </header>
+
+        <!-- Show current storage use and the fixed 200 MB limit. -->
+        <section class="storage-card" aria-label="Storage usage">
+            <div class="storage-line">
+                <span>Storage used</span>
+                <strong id="storage-text">Loading...</strong>
+            </div>
+            <div class="storage-track"><div id="storage-bar" class="storage-bar"></div></div>
+        </section>
+
+        <!-- This form lets the user choose and upload one file. -->
+        <section class="upload-card">
+            <form id="upload-form">
+                <label for="file-input">Choose one file</label>
+                <div class="upload-row">
+                    <input id="file-input" type="file" required>
+                    <button id="upload-button" type="submit">Upload</button>
+                </div>
+            </form>
+            <p id="drive-message" class="message" role="status"></p>
+        </section>
+
+        <!-- The table body is filled by JavaScript after the API replies. -->
+        <section class="files-card">
+            <h2>Files</h2>
+            <p id="empty-message" class="empty-message">Loading your files...</p>
+            <div class="table-wrapper">
+                <table id="files-table">
+                    <thead><tr><th>Name</th><th>Size</th><th>Uploaded</th><th>Actions</th></tr></thead>
+                    <tbody id="files-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Load page behaviour after all HTML elements exist. -->
+    <script src="app.js"></script>
+</body>
+</html>
